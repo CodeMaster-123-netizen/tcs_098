@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number to Words Converter</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* styles.css */
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  transition: transform 0.3s ease;
+}
+
+.container:hover {
+  transform: scale(1.02);
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+}
+
+input[type="number"]:focus {
+  border: 1px solid #4facfe;
+  outline: none;
+}
+
+button {
+  padding: 12px 20px;
+  margin: 5px;
+  background: #4facfe;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: #00f2fe;
+  transform: translateY(-2px);
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #f9f9f9;
+  min-height: 50px;
+}
+
+  </style>
+  <style>
+    /* styles.css */
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+      transition: transform 0.3s ease;
+    }
+
+    .container:hover {
+      transform: scale(1.02);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border 0.3s ease;
+    }
+
+    input[type="number"]:focus {
+      border: 1px solid #4facfe;
+      outline: none;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin: 5px;
+      background: #4facfe;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: #00f2fe;
+      transform: translateY(-2px);
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #f9f9f9;
+      min-height: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Number to Words Converter</h1>
+    <input type="number" id="numberInput" placeholder="Enter a number" min="0">
+    <button id="convertButton">Convert to Words</button>
+    <div id="result" class="result"></div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+<script>
+  // script.js
+
+const numberInput = document.getElementById('numberInput');
+const convertButton = document.getElementById('convertButton');
+const resultDiv = document.getElementById('result');
+
+function convertNumberToWords(num) {
+  const belowTwenty = [
+    'Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine',
+    'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 
+    'Eighteen', 'Nineteen'
+  ];
+  const tens = [
+    '', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'
+  ];
+  const thousands = ['', 'Thousand', 'Million', 'Billion'];
+
+  if (num < 20) return belowTwenty[num];
+  if (num < 100) return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? ' ' + belowTwenty[num % 10] : '');
+  if (num < 1000) return belowTwenty[Math.floor(num / 100)] + ' Hundred' + (num % 100 !== 0 ? ' ' + convertNumberToWords(num % 100) : '');
+
+  for (let i = 0; i < thousands.length; i++) {
+    const divisor = Math.pow(1000, i);
+    if (num < divisor * 1000) {
+      return convertNumberToWords(Math.floor(num / divisor)) + ' ' + thousands[i] + (num % divisor !== 0 ? ' ' + convertNumberToWords(num % divisor) : '');
+    }
+  }
+}
+
+convertButton.addEventListener('click', () => {
+  const number = parseInt(numberInput.value, 10);
+  if (isNaN(number) || number < 0) {
+    resultDiv.innerText = 'Please enter a valid positive number.';
+  } else {
+    const words = convertNumberToWords(number);
+    resultDiv.innerText = words;
+  }
+});
+</script>
+</html>
