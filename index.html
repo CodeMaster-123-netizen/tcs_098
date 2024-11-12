@@ -3,168 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Number to Words Converter</title>
+  <title>Number to Words Converter - Convert Numbers to Words Easily</title>
+  <meta name="description" content="Convert numbers to words easily with our Number to Words Converter. Enter a number and get the corresponding words instantly.">
+  <meta name="keywords" content="number to words, number converter, convert numbers, words converter">
+  <meta name="author" content="Your Name">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* styles.css */
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 20px;
-}
-
-.container {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  text-align: center;
-  width: 100%;
-  max-width: 400px;
-  transition: transform 0.3s ease;
-}
-
-.container:hover {
-  transform: scale(1.02);
-}
-
-h1 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
-}
-
-input[type="number"] {
-  width: 100%;
-  padding: 15px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-  transition: border 0.3s ease;
-}
-
-input[type="number"]:focus {
-  border: 1px solid #4facfe;
-  outline: none;
-}
-
-button {
-  padding: 12px 20px;
-  margin: 5px;
-  background: #4facfe;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-  background: #00f2fe;
-  transform: translateY(-2px);
-}
-
-.result {
-  margin-top: 20px;
-  font-size: 18px;
-  color: #333;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background: #f9f9f9;
-  min-height: 50px;
-}
-
-/* Add navbar styles */
-.navbar {
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 1rem 2rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.nav-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #4facfe;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.nav-link {
-  color: #333;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-}
-
-.nav-link:hover {
-  color: #4facfe;
-  background: rgba(79, 172, 254, 0.1);
-}
-
-/* Adjust body padding to account for fixed navbar */
-body {
-  padding-top: 80px;
-}
-
-/* Mobile responsive menu */
-.menu-toggle {
-  display: none;
-  cursor: pointer;
-  font-size: 1.5rem;
-}
-
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    flex-direction: column;
-    padding: 1rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
-}
-  </style>
 </head>
 <body>
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Main Navigation">
     <a href="#" class="nav-brand">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
@@ -172,7 +18,7 @@ body {
       </svg>
       Number Converter
     </a>
-    <div class="menu-toggle">☰</div>
+    <div class="menu-toggle" aria-label="Toggle navigation">☰</div>
     <div class="nav-links">
       <a href="#" class="nav-link">Home</a>
       <a href="#" class="nav-link">About</a>
@@ -180,68 +26,25 @@ body {
     </div>
   </nav>
 
-  <div class="container">
+  <div class="container" role="main">
     <h1>Number to Words Converter</h1>
-    <input type="number" id="numberInput" placeholder="Enter a number" min="0">
-    <button id="convertButton">Convert to Words</button>
+    <div class="input-group">
+      <input type="number" id="numberInput" placeholder="Enter a number" min="0" max="999999999999" aria-label="Number input">
+    </div>
+    <div class="button-group">
+      <button id="convertButton">Convert to Words</button>
+      <button id="clearButton" class="clear-button">Clear</button>
+    </div>
+    <div class="loading">Loading...</div>
     <div id="result" class="result"></div>
+    <button id="copyButton">Copy to Clipboard</button>
   </div>
-  
+
+  <footer class="footer">
+    <p>&copy; 2024 Your Name. All rights reserved.</p>
+    <p>Made with ❤️ for learning purposes.</p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
-<script>
-  // script.js
-
-const numberInput = document.getElementById('numberInput');
-const convertButton = document.getElementById('convertButton');
-const resultDiv = document.getElementById('result');
-
-function convertNumberToWords(num) {
-  const belowTwenty = [
-    'Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine',
-    'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 
-    'Eighteen', 'Nineteen'
-  ];
-  const tens = [
-    '', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'
-  ];
-  const thousands = ['', 'Thousand', 'Million', 'Billion'];
-
-  if (num < 20) return belowTwenty[num];
-  if (num < 100) return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? ' ' + belowTwenty[num % 10] : '');
-  if (num < 1000) return belowTwenty[Math.floor(num / 100)] + ' Hundred' + (num % 100 !== 0 ? ' ' + convertNumberToWords(num % 100) : '');
-
-  for (let i = 0; i < thousands.length; i++) {
-    const divisor = Math.pow(1000, i);
-    if (num < divisor * 1000) {
-      return convertNumberToWords(Math.floor(num / divisor)) + ' ' + thousands[i] + (num % divisor !== 0 ? ' ' + convertNumberToWords(num % divisor) : '');
-    }
-  }
-}
-
-convertButton.addEventListener('click', () => {
-  const number = parseInt(numberInput.value, 10);
-  if (isNaN(number) || number < 0) {
-    resultDiv.innerText = 'Please enter a valid positive number.';
-  } else {
-    const words = convertNumberToWords(number);
-    resultDiv.innerText = words;
-  }
-});
-
-// Mobile menu toggle
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-
-menuToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('active');
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.navbar')) {
-    navLinks.classList.remove('active');
-  }
-});
-</script>
 </html>
